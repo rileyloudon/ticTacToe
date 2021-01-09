@@ -16,6 +16,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   width: 90vw;
+  max-width: 1000px;
   height: 80vh;
   padding-top: 5vh;
   margin: auto;
@@ -53,4 +54,10 @@ body {
 }
 .bottom-right {
   grid-area: 3 / 3 / 4 / 4;
+}
+
+@media (max-width: 768px) {
+  #game-board {
+    height: 50vh;
+  }
 }
