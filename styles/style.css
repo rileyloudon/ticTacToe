@@ -22,38 +22,10 @@ body {
   margin: auto;
 }
 
-#game-square {
+.game-square {
   width: 100%;
   height: 100%;
   border: 1px solid var(--dark-secondary-color);
-}
-
-.top-left {
-  grid-area: 1 / 1 / 2 / 2;
-}
-.top-middle {
-  grid-area: 1 / 2 / 2 / 3;
-}
-.top-right {
-  grid-area: 1 / 3 / 2 / 4;
-}
-.middle-left {
-  grid-area: 2 / 1 / 3 / 2;
-}
-.middle-middle {
-  grid-area: 2 / 2 / 3 / 3;
-}
-.middle-right {
-  grid-area: 2 / 3 / 3 / 4;
-}
-.bottom-left {
-  grid-area: 3 / 1 / 4 / 2;
-}
-.bottom-middle {
-  grid-area: 3 / 2 / 4 / 3;
-}
-.bottom-right {
-  grid-area: 3 / 3 / 4 / 4;
 }
 
 @media (max-width: 768px) {
