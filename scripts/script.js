@@ -5,18 +5,24 @@ const Gameboard = (() => {
     return _board;
   };
 
+  let _playerTurn = '';
+
   const userMove = (e) => {
     e.target.classList.contains('game-square')
-      ? _board.includes('X' + e.target.id || 'O' + e.target.id)
+      ? _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
+        _board.includes(`${player2.playerSymbol}${e.target.id}`)
         ? false
         : displayMove(e)
       : false;
   };
 
   const displayMove = (e) => {
+    _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
+
     clickedSquare = document.getElementById(`${e.target.id}`);
-    clickedSquare.innerHTML = player1.checkSymbol;
-    _board.push(`${player1.checkSymbol}` + e.target.id);
+    clickedSquare.innerHTML = _playerTurn.playerSymbol;
+
+    _board.push(`${_playerTurn.playerSymbol}${e.target.id}`);
 
     console.log(_board);
   };
@@ -29,17 +35,14 @@ const Gameboard = (() => {
 
 // Handle player data:
 const Player = (name, symbol) => {
-  const checkName = name;
-  const checkSymbol = symbol;
+  const playerName = name;
+  const playerSymbol = symbol;
 
-  return { checkName, checkSymbol };
+  return { playerName, playerSymbol };
 };
-
-// Handle game backend
-const Controller = (() => {
-  // let playerTurn = player1;
-  // playerTurn === player1 ? playerTurn === player2 : playerTurn === player1;
-})();
 
 const player1 = Player('Riley', 'X');
 const player2 = Player('Loudon', 'O');
+
+// Handle game backend
+const Controller = (() => {})();
