@@ -1,7 +1,10 @@
-// Handle all visual changes:
+// TTT
 const Gameboard = (() => {
+  resetBtn = document.getElementById('reset');
+  message = document.getElementById('winning-message');
+
   let _board = [];
-  gameOver = false;
+  let _gameOver = false;
   // const checkBoard = () => {
   //   return _board;
   // };
@@ -9,7 +12,7 @@ const Gameboard = (() => {
   let _playerTurn = '';
 
   const validMove = (e) => {
-    gameOver
+    _gameOver
       ? false
       : e.target.classList.contains('game-square')
       ? _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
@@ -26,69 +29,105 @@ const Gameboard = (() => {
     clickedSquare.innerHTML = _playerTurn.playerSymbol;
 
     _board.push(`${_playerTurn.playerSymbol}${e.target.id}`);
-    controller();
+    checkEndGame();
   };
 
   window.addEventListener('touchstart', validMove);
   window.addEventListener('click', validMove);
 
-  const controller = () => {
+  const resetBoard = () => {
+    _board = [];
+    _gameOver = false;
+    gameSquares = document.querySelectorAll('.game-square');
+    gameSquares.forEach((square) => {
+      square.innerHTML = '';
+    });
+    message.innerHTML = '';
+  };
+
+  resetBtn.addEventListener('click', resetBoard);
+
+  const checkEndGame = () => {
     console.log(_board);
 
-    // End Game
-    (_board.includes('X1') && _board.includes('X2') && _board.includes('X3')) ||
-    (_board.includes('O1') && _board.includes('O2') && _board.includes('O3'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+    const winningMessage = () => {
+      _gameOver = true;
+      _playerTurn.playerScore += 1;
 
-    (_board.includes('X4') && _board.includes('X5') && _board.includes('X6')) ||
-    (_board.includes('O4') && _board.includes('O5') && _board.includes('O6'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      message.innerHTML = `${_playerTurn.playerName} Wins!`;
+    };
+    if (_board.length >= 5) {
+      (_board.includes('X1') &&
+        _board.includes('X2') &&
+        _board.includes('X3')) ||
+      (_board.includes('O1') && _board.includes('O2') && _board.includes('O3'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X7') && _board.includes('X8') && _board.includes('X9')) ||
-    (_board.includes('O7') && _board.includes('O8') && _board.includes('O9'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X4') &&
+        _board.includes('X5') &&
+        _board.includes('X6')) ||
+      (_board.includes('O4') && _board.includes('O5') && _board.includes('O6'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X1') && _board.includes('X4') && _board.includes('X7')) ||
-    (_board.includes('O1') && _board.includes('O4') && _board.includes('O7'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X7') &&
+        _board.includes('X8') &&
+        _board.includes('X9')) ||
+      (_board.includes('O7') && _board.includes('O8') && _board.includes('O9'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X2') && _board.includes('X5') && _board.includes('X8')) ||
-    (_board.includes('O2') && _board.includes('O5') && _board.includes('O8'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X1') &&
+        _board.includes('X4') &&
+        _board.includes('X7')) ||
+      (_board.includes('O1') && _board.includes('O4') && _board.includes('O7'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X3') && _board.includes('X6') && _board.includes('X9')) ||
-    (_board.includes('O3') && _board.includes('O6') && _board.includes('O9'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X2') &&
+        _board.includes('X5') &&
+        _board.includes('X8')) ||
+      (_board.includes('O2') && _board.includes('O5') && _board.includes('O8'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X1') && _board.includes('X5') && _board.includes('X9')) ||
-    (_board.includes('O1') && _board.includes('O5') && _board.includes('O9'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X3') &&
+        _board.includes('X6') &&
+        _board.includes('X9')) ||
+      (_board.includes('O3') && _board.includes('O6') && _board.includes('O9'))
+        ? winningMessage()
+        : false;
 
-    (_board.includes('X3') && _board.includes('X5') && _board.includes('X7')) ||
-    (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
-      ? ((gameOver = true), console.log(`${_playerTurn.playerName} Wins!`))
-      : false;
+      (_board.includes('X1') &&
+        _board.includes('X5') &&
+        _board.includes('X9')) ||
+      (_board.includes('O1') && _board.includes('O5') && _board.includes('O9'))
+        ? winningMessage()
+        : false;
 
-    _board.length === 9 && !gameOver ? (gameOver = true) : false;
+      (_board.includes('X3') &&
+        _board.includes('X5') &&
+        _board.includes('X7')) ||
+      (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
+        ? winningMessage()
+        : false;
+
+      _board.length === 9 && !_gameOver ? (_gameOver = true) : false;
+    }
   };
 
   // return { checkBoard };
 })();
 
 // Handle player data:
-const Player = (name, symbol) => {
+const Player = (name, symbol, score) => {
   const playerName = name;
   const playerSymbol = symbol;
+  const playerScore = score;
 
-  return { playerName, playerSymbol };
+  return { playerName, playerSymbol, playerScore };
 };
 
-const player1 = Player('Riley', 'X');
-const player2 = Player('Mary', 'O');
+const player1 = Player('Riley', 'X', 0);
+const player2 = Player('Mary', 'O', 0);
