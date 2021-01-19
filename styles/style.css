@@ -20,7 +20,7 @@ body {
   touch-action: manipulation;
 }
 
-.reset {
+#reset {
   color: var(--dark-secondary-color);
   background-color: var(--dark-main-color);
   border: 1px solid var(--dark-secondary-color);
@@ -44,7 +44,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   width: 90vw;
   max-width: 1000px;
-  height: 80vh;
+  height: 76vh;
   padding-top: 25px;
   margin: auto;
 }
@@ -64,9 +64,10 @@ body {
   -moz-user-select: none;
 }
 
-.winning-message {
+#winning-message {
   padding-top: 25px;
   text-align: center;
+  font-size: 1.35em;
 }
 
 @media (max-width: 768px) {
