@@ -5,6 +5,9 @@ const Gameboard = (() => {
 
   let _board = [];
   let _gameOver = false;
+
+  let player1 = '';
+  let player2 = '';
   let _playerTurn = '';
 
   const validMove = (e) => {
@@ -100,30 +103,30 @@ const Gameboard = (() => {
       ? ((_gameOver = true), (message.innerHTML = `It's a Draw!`))
       : false;
   };
+
+  // Handle player data:
+  const Player = (name, symbol, score, type) => {
+    const playerName = name;
+    const playerSymbol = symbol;
+    const playerScore = score;
+    const playerType = type;
+
+    return { playerName, playerSymbol, playerScore, playerType };
+  };
+
+  const startGame = () => {
+    const modal = document.getElementById('modal');
+    let enteredPlayer1Name = document.getElementById('name1').value;
+    let enteredPlayer2Name = document.getElementById('name2').value;
+
+    player1 = Player(enteredPlayer1Name, 'X', 0, 'person');
+    player2 = Player(enteredPlayer2Name, 'O', 0, 'person');
+
+    enteredPlayer1Name && enteredPlayer2Name
+      ? modal.classList.add('hide-modal')
+      : false;
+  };
+
+  startBtn = document.getElementById('start-btn');
+  startBtn.addEventListener('click', startGame);
 })();
-
-// Handle player data:
-const Player = (name, symbol, score, type) => {
-  const playerName = name;
-  const playerSymbol = symbol;
-  const playerScore = score;
-  const playerType = type;
-
-  return { playerName, playerSymbol, playerScore, playerType };
-};
-
-const startGame = () => {
-  const modal = document.getElementById('modal');
-  enteredPlayer1Name && enteredPlayer2Name
-    ? modal.classList.add('hide-modal')
-    : false;
-};
-
-const enteredPlayer1Name = document.getElementById('name1').value;
-const enteredPlayer2Name = document.getElementById('name2').value;
-
-const player1 = Player(enteredPlayer1Name, 'X', 0, 'person');
-const player2 = Player(enteredPlayer2Name, 'O', 0, 'person');
-
-startBtn = document.getElementById('start-btn');
-startBtn.addEventListener('click', startGame);
