@@ -20,7 +20,8 @@ body {
   touch-action: manipulation;
 }
 
-#reset {
+#reset,
+#start-btn {
   color: var(--dark-secondary-color);
   background-color: var(--dark-main-color);
   border: 1px solid var(--dark-secondary-color);
@@ -68,6 +69,80 @@ body {
   padding-top: 25px;
   text-align: center;
   font-size: 1.35em;
+}
+
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-container.hide-modal {
+  display: none;
+}
+
+.modal {
+  background-color: var(--dark-main-color);
+  border: 1px solid var(--dark-secondary-color);
+  border-radius: 5px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+}
+
+.modal-header {
+  color: #fff;
+  padding: 15px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  border-bottom: 1px solid #fff;
+}
+
+.modal-content {
+  padding: 0 20px 20px 20px;
+}
+
+.modal-form div {
+  margin: 15px 0;
+}
+
+input[type='radio'] {
+  color: aqua;
+}
+
+.modal-form .form-input {
+  border: 1px solid var(--dark-secondary-color);
+  color: var(--dark-secondary-color);
+  width: 100%;
+  font-size: 1em;
+  padding: 8px;
+  border-radius: 4px;
+  overflow: visible;
+  background-color: transparent;
+  margin-top: 5px;
+}
+
+.modal-form::placeholder .form-input::placeholder {
+  color: var(--dark-secondary-color);
+}
+
+#start-btn {
+  font-size: 0.9em;
+  width: 150px;
+}
+
+p {
+  text-align: center;
 }
 
 @media (max-width: 768px) {
