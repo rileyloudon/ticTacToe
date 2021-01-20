@@ -5,10 +5,6 @@ const Gameboard = (() => {
 
   let _board = [];
   let _gameOver = false;
-  // const checkBoard = () => {
-  //   return _board;
-  // };
-
   let _playerTurn = '';
 
   const validMove = (e) => {
@@ -29,7 +25,10 @@ const Gameboard = (() => {
     clickedSquare.innerHTML = _playerTurn.playerSymbol;
 
     _board.push(`${_playerTurn.playerSymbol}${e.target.id}`);
-    checkEndGame();
+
+    if (_board.length >= 5) {
+      checkEndGame();
+    }
   };
 
   window.addEventListener('touchstart', validMove);
@@ -56,78 +55,75 @@ const Gameboard = (() => {
 
       message.innerHTML = `${_playerTurn.playerName} Wins!`;
     };
-    if (_board.length >= 5) {
-      (_board.includes('X1') &&
-        _board.includes('X2') &&
-        _board.includes('X3')) ||
-      (_board.includes('O1') && _board.includes('O2') && _board.includes('O3'))
-        ? winningMessage()
-        : false;
 
-      (_board.includes('X4') &&
-        _board.includes('X5') &&
-        _board.includes('X6')) ||
-      (_board.includes('O4') && _board.includes('O5') && _board.includes('O6'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X1') && _board.includes('X2') && _board.includes('X3')) ||
+    (_board.includes('O1') && _board.includes('O2') && _board.includes('O3'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X7') &&
-        _board.includes('X8') &&
-        _board.includes('X9')) ||
-      (_board.includes('O7') && _board.includes('O8') && _board.includes('O9'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X4') && _board.includes('X5') && _board.includes('X6')) ||
+    (_board.includes('O4') && _board.includes('O5') && _board.includes('O6'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X1') &&
-        _board.includes('X4') &&
-        _board.includes('X7')) ||
-      (_board.includes('O1') && _board.includes('O4') && _board.includes('O7'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X7') && _board.includes('X8') && _board.includes('X9')) ||
+    (_board.includes('O7') && _board.includes('O8') && _board.includes('O9'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X2') &&
-        _board.includes('X5') &&
-        _board.includes('X8')) ||
-      (_board.includes('O2') && _board.includes('O5') && _board.includes('O8'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X1') && _board.includes('X4') && _board.includes('X7')) ||
+    (_board.includes('O1') && _board.includes('O4') && _board.includes('O7'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X3') &&
-        _board.includes('X6') &&
-        _board.includes('X9')) ||
-      (_board.includes('O3') && _board.includes('O6') && _board.includes('O9'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X2') && _board.includes('X5') && _board.includes('X8')) ||
+    (_board.includes('O2') && _board.includes('O5') && _board.includes('O8'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X1') &&
-        _board.includes('X5') &&
-        _board.includes('X9')) ||
-      (_board.includes('O1') && _board.includes('O5') && _board.includes('O9'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X3') && _board.includes('X6') && _board.includes('X9')) ||
+    (_board.includes('O3') && _board.includes('O6') && _board.includes('O9'))
+      ? winningMessage()
+      : false;
 
-      (_board.includes('X3') &&
-        _board.includes('X5') &&
-        _board.includes('X7')) ||
-      (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
-        ? winningMessage()
-        : false;
+    (_board.includes('X1') && _board.includes('X5') && _board.includes('X9')) ||
+    (_board.includes('O1') && _board.includes('O5') && _board.includes('O9'))
+      ? winningMessage()
+      : false;
 
-      _board.length === 9 && !_gameOver ? (_gameOver = true) : false;
-    }
+    (_board.includes('X3') && _board.includes('X5') && _board.includes('X7')) ||
+    (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
+      ? winningMessage()
+      : false;
+
+    _board.length === 9 && !_gameOver
+      ? ((_gameOver = true), (message.innerHTML = `It's a Draw!`))
+      : false;
   };
-
-  // return { checkBoard };
 })();
 
 // Handle player data:
-const Player = (name, symbol, score) => {
+const Player = (name, symbol, score, type) => {
   const playerName = name;
   const playerSymbol = symbol;
   const playerScore = score;
+  const playerType = type;
 
-  return { playerName, playerSymbol, playerScore };
+  return { playerName, playerSymbol, playerScore, playerType };
 };
 
-const player1 = Player('Riley', 'X', 0);
-const player2 = Player('Mary', 'O', 0);
+const startGame = () => {
+  const modal = document.getElementById('modal');
+  enteredPlayer1Name && enteredPlayer2Name
+    ? modal.classList.add('hide-modal')
+    : false;
+};
+
+const enteredPlayer1Name = document.getElementById('name1').value;
+const enteredPlayer2Name = document.getElementById('name2').value;
+
+const player1 = Player(enteredPlayer1Name, 'X', 0, 'person');
+const player2 = Player(enteredPlayer2Name, 'O', 0, 'person');
+
+startBtn = document.getElementById('start-btn');
+startBtn.addEventListener('click', startGame);
