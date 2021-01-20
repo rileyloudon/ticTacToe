@@ -11,6 +11,64 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
+    <div class="modal-container" id="modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Tic Tac Toe</h3>
+        </div>
+        <div class="modal-content">
+          <form class="modal-form">
+            <div>
+              <p>Player 1 Settings:</p>
+              <label for="name">Name</label>
+              <input
+                required
+                type="text"
+                id="name1"
+                placeholder="Enter Name"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="person"
+                name="p1-type"
+                value="person"
+              />
+              <label for="person">Human</label>
+              <input type="radio" class="bot" name="p1-type" value="bot" />
+              <label for="bot">Bot</label>
+            </div>
+            <div>
+              <p>Player 2 Settings:</p>
+              <label for="email">Name</label>
+              <input
+                required
+                type="text"
+                id="name2"
+                placeholder="Enter Name"
+                class="form-input"
+              />
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="person"
+                name="p2-type"
+                value="person"
+              />
+              <label for="person">Human</label>
+              <input type="radio" class="bot" name="p2-type" value="bot" />
+              <label for="bot">Bot</label>
+            </div>
+
+            <input type="button" value="Start" id="start-btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+
     <button id="reset">Reset</button>
     <div id="game-board">
       <div id="1" class="game-square"></div>
