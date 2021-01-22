@@ -10,6 +10,7 @@ const Gameboard = (() => {
   let player2 = '';
   let _playerTurn = '';
 
+  // Human player type
   const validMove = (e) => {
     _gameOver
       ? false
@@ -22,8 +23,6 @@ const Gameboard = (() => {
   };
 
   const displayMove = (e) => {
-    _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
-
     clickedSquare = document.getElementById(`${e.target.id}`);
     clickedSquare.innerHTML = _playerTurn.playerSymbol;
 
@@ -32,11 +31,26 @@ const Gameboard = (() => {
     if (_board.length >= 5) {
       checkEndGame();
     }
+
+    _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
+    _playerTurn.playerType === 'computer' ? displayComputerMove() : false;
   };
 
   window.addEventListener('touchstart', validMove);
   window.addEventListener('click', validMove);
 
+  // Computer player type
+  const displayComputerMove = () => {
+    while (_playerTurn.playerType === 'computer') {
+      console.log('beep boop');
+
+      _playerTurn === player1
+        ? (_playerTurn = player2)
+        : (_playerTurn = player1);
+    }
+  };
+
+  // Reset board for a new game with same players
   const resetBoard = () => {
     _board = [];
     _gameOver = false;
@@ -49,6 +63,7 @@ const Gameboard = (() => {
 
   resetBtn.addEventListener('click', resetBoard);
 
+  // Check if win condition is met
   const checkEndGame = () => {
     console.log(_board);
 
@@ -116,15 +131,23 @@ const Gameboard = (() => {
 
   const startGame = () => {
     const modal = document.getElementById('modal');
-    let enteredPlayer1Name = document.getElementById('name1').value;
-    let enteredPlayer2Name = document.getElementById('name2').value;
+    const enteredPlayer1Name = document.getElementById('name1').value;
+    const enteredPlayer2Name = document.getElementById('name2').value;
 
-    player1 = Player(enteredPlayer1Name, 'X', 0, 'person');
-    player2 = Player(enteredPlayer2Name, 'O', 0, 'person');
+    const player1Type = Array.from(document.getElementsByName('p1-type')).find(
+      (item) => item.checked,
+    ).value;
+    const player2Type = Array.from(document.getElementsByName('p2-type')).find(
+      (item) => item.checked,
+    ).value;
 
-    enteredPlayer1Name && enteredPlayer2Name
-      ? modal.classList.add('hide-modal')
-      : false;
+    if (enteredPlayer1Name && enteredPlayer2Name) {
+      modal.classList.add('hide-modal');
+      player1 = Player(enteredPlayer1Name, 'X', 0, player1Type);
+      player2 = Player(enteredPlayer2Name, 'O', 0, player2Type);
+      _playerTurn = player1;
+      player1Type === 'computer' ? displayComputerMove() : false;
+    }
   };
 
   startBtn = document.getElementById('start-btn');
