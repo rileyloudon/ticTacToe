@@ -12,13 +12,15 @@ const Gameboard = (() => {
 
   // Human player type
   const validMove = (e) => {
-    _gameOver
-      ? false
-      : e.target.classList.contains('game-square')
-      ? _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
-        _board.includes(`${player2.playerSymbol}${e.target.id}`)
+    _playerTurn.playerType === 'human'
+      ? _gameOver
         ? false
-        : displayMove(e)
+        : e.target.classList.contains('game-square')
+        ? _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
+          _board.includes(`${player2.playerSymbol}${e.target.id}`)
+          ? false
+          : displayMove(e)
+        : false
       : false;
   };
 
@@ -35,7 +37,7 @@ const Gameboard = (() => {
     _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
 
     if (!_gameOver && _playerTurn.playerType === 'computer') {
-      displayComputerMove();
+      setTimeout(displayComputerMove, 500);
     }
   };
 
@@ -44,30 +46,30 @@ const Gameboard = (() => {
 
   // Computer player type
   const displayComputerMove = () => {
-    while (_playerTurn.playerType === 'computer') {
-      const allSquares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-      let availableSquares = allSquares.filter((square) => {
-        return !_board.includes('X' + square) && !_board.includes('O' + square);
-      });
+    const allSquares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let availableSquares = allSquares.filter((square) => {
+      return !_board.includes('X' + square) && !_board.includes('O' + square);
+    });
 
-      let computerSelection =
-        availableSquares[Math.floor(Math.random() * availableSquares.length)];
+    let computerSelection =
+      availableSquares[Math.floor(Math.random() * availableSquares.length)];
 
-      computerSquare = document.getElementById(`${computerSelection}`);
-      computerSquare.innerHTML = _playerTurn.playerSymbol;
+    computerSquare = document.getElementById(`${computerSelection}`);
+    computerSquare.innerHTML = _playerTurn.playerSymbol;
 
-      _board.push(`${_playerTurn.playerSymbol}${computerSelection}`);
+    _board.push(`${_playerTurn.playerSymbol}${computerSelection}`);
 
-      console.log(availableSquares);
-      console.log('Random Number = ' + computerSelection);
+    console.log(availableSquares);
+    console.log('Random Number = ' + computerSelection);
 
-      if (_board.length >= 5) {
-        checkEndGame();
-      }
+    if (_board.length >= 5) {
+      checkEndGame();
+    }
 
-      _playerTurn === player1
-        ? (_playerTurn = player2)
-        : (_playerTurn = player1);
+    _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
+
+    if (!_gameOver && _playerTurn.playerType === 'computer') {
+      setTimeout(displayComputerMove, 500);
     }
   };
 
@@ -81,7 +83,9 @@ const Gameboard = (() => {
     });
     message.innerHTML = '';
 
-    _playerTurn.playerType === 'computer' ? displayComputerMove() : false;
+    _playerTurn.playerType === 'computer'
+      ? setTimeout(displayComputerMove, 250)
+      : false;
   };
 
   resetBtn.addEventListener('click', resetBoard);
@@ -169,7 +173,7 @@ const Gameboard = (() => {
       player1 = Player(enteredPlayer1Name, 'X', 0, player1Type);
       player2 = Player(enteredPlayer2Name, 'O', 0, player2Type);
       _playerTurn = player1;
-      player1Type === 'computer' ? displayComputerMove() : false;
+      player1Type === 'computer' ? setTimeout(displayComputerMove, 250) : false;
     }
   };
 
