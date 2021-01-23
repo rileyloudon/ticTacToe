@@ -33,7 +33,10 @@ const Gameboard = (() => {
     }
 
     _playerTurn === player1 ? (_playerTurn = player2) : (_playerTurn = player1);
-    _playerTurn.playerType === 'computer' ? displayComputerMove() : false;
+
+    if (!_gameOver && _playerTurn.playerType === 'computer') {
+      displayComputerMove();
+    }
   };
 
   window.addEventListener('touchstart', validMove);
@@ -42,7 +45,25 @@ const Gameboard = (() => {
   // Computer player type
   const displayComputerMove = () => {
     while (_playerTurn.playerType === 'computer') {
-      console.log('beep boop');
+      const allSquares = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      let availableSquares = allSquares.filter((square) => {
+        return !_board.includes('X' + square) && !_board.includes('O' + square);
+      });
+
+      let computerSelection =
+        availableSquares[Math.floor(Math.random() * availableSquares.length)];
+
+      computerSquare = document.getElementById(`${computerSelection}`);
+      computerSquare.innerHTML = _playerTurn.playerSymbol;
+
+      _board.push(`${_playerTurn.playerSymbol}${computerSelection}`);
+
+      console.log(availableSquares);
+      console.log('Random Number = ' + computerSelection);
+
+      if (_board.length >= 5) {
+        checkEndGame();
+      }
 
       _playerTurn === player1
         ? (_playerTurn = player2)
@@ -59,6 +80,8 @@ const Gameboard = (() => {
       square.innerHTML = '';
     });
     message.innerHTML = '';
+
+    _playerTurn.playerType === 'computer' ? displayComputerMove() : false;
   };
 
   resetBtn.addEventListener('click', resetBoard);
