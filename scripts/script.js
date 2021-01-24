@@ -1,7 +1,7 @@
 // TTT
 const Gameboard = (() => {
-  resetBtn = document.getElementById('reset');
-  message = document.getElementById('winning-message');
+  const resetBtn = document.getElementById('reset');
+  const message = document.getElementById('winning-message');
 
   let _board = [];
   let _gameOver = false;
@@ -25,7 +25,7 @@ const Gameboard = (() => {
   };
 
   const displayMove = (e) => {
-    clickedSquare = document.getElementById(`${e.target.id}`);
+    const clickedSquare = document.getElementById(`${e.target.id}`);
     clickedSquare.innerHTML = _playerTurn.playerSymbol;
 
     _board.push(`${_playerTurn.playerSymbol}${e.target.id}`);
@@ -54,7 +54,7 @@ const Gameboard = (() => {
     let computerSelection =
       availableSquares[Math.floor(Math.random() * availableSquares.length)];
 
-    computerSquare = document.getElementById(`${computerSelection}`);
+    const computerSquare = document.getElementById(`${computerSelection}`);
     computerSquare.innerHTML = _playerTurn.playerSymbol;
 
     _board.push(`${_playerTurn.playerSymbol}${computerSelection}`);
@@ -77,7 +77,7 @@ const Gameboard = (() => {
   const resetBoard = () => {
     _board = [];
     _gameOver = false;
-    gameSquares = document.querySelectorAll('.game-square');
+    const gameSquares = document.querySelectorAll('.game-square');
     gameSquares.forEach((square) => {
       square.innerHTML = '';
     });
@@ -98,44 +98,25 @@ const Gameboard = (() => {
       _gameOver = true;
       _playerTurn.playerScore += 1;
 
-      message.innerHTML = `${_playerTurn.playerName} Wins!`;
+      _playerTurn === player1
+        ? (message.innerHTML = `${_playerTurn.playerName} Wins! The score is ${player1.playerScore} - ${player2.playerScore}`)
+        : (message.innerHTML = `${_playerTurn.playerName} Wins! The score is ${player2.playerScore} - ${player1.playerScore}`);
     };
 
     (_board.includes('X1') && _board.includes('X2') && _board.includes('X3')) ||
-    (_board.includes('O1') && _board.includes('O2') && _board.includes('O3'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O1') && _board.includes('O2') && _board.includes('O3')) ||
     (_board.includes('X4') && _board.includes('X5') && _board.includes('X6')) ||
-    (_board.includes('O4') && _board.includes('O5') && _board.includes('O6'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O4') && _board.includes('O5') && _board.includes('O6')) ||
     (_board.includes('X7') && _board.includes('X8') && _board.includes('X9')) ||
-    (_board.includes('O7') && _board.includes('O8') && _board.includes('O9'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O7') && _board.includes('O8') && _board.includes('O9')) ||
     (_board.includes('X1') && _board.includes('X4') && _board.includes('X7')) ||
-    (_board.includes('O1') && _board.includes('O4') && _board.includes('O7'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O1') && _board.includes('O4') && _board.includes('O7')) ||
     (_board.includes('X2') && _board.includes('X5') && _board.includes('X8')) ||
-    (_board.includes('O2') && _board.includes('O5') && _board.includes('O8'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O2') && _board.includes('O5') && _board.includes('O8')) ||
     (_board.includes('X3') && _board.includes('X6') && _board.includes('X9')) ||
-    (_board.includes('O3') && _board.includes('O6') && _board.includes('O9'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O3') && _board.includes('O6') && _board.includes('O9')) ||
     (_board.includes('X1') && _board.includes('X5') && _board.includes('X9')) ||
-    (_board.includes('O1') && _board.includes('O5') && _board.includes('O9'))
-      ? winningMessage()
-      : false;
-
+    (_board.includes('O1') && _board.includes('O5') && _board.includes('O9')) ||
     (_board.includes('X3') && _board.includes('X5') && _board.includes('X7')) ||
     (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
       ? winningMessage()
