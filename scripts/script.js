@@ -278,13 +278,13 @@ const Gameboard = (() => {
       (item) => item.checked,
     ).value;
 
-    // if (enteredPlayer1Name && enteredPlayer2Name) {
-    modal.classList.add('hide-modal');
-    player1 = Player(enteredPlayer1Name, 'X', 0, player1Type);
-    player2 = Player(enteredPlayer2Name, 'O', 0, player2Type);
-    _playerTurn = player1;
-    player1Type === 'computer' ? setTimeout(displayComputerMove, 250) : false;
-    // }
+    if (enteredPlayer1Name && enteredPlayer2Name) {
+      modal.classList.add('hide-modal');
+      player1 = Player(enteredPlayer1Name, 'X', 0, player1Type);
+      player2 = Player(enteredPlayer2Name, 'O', 0, player2Type);
+      _playerTurn = player1;
+      player1Type === 'computer' ? setTimeout(displayComputerMove, 250) : false;
+    }
   };
 
   startBtn = document.getElementById('start-btn');
