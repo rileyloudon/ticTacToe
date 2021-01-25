@@ -18,7 +18,7 @@
         </div>
         <div class="modal-content">
           <form class="modal-form">
-            <div>
+            <div class="player1">
               <p>Player 1 Settings:</p>
               <label for="name">Name</label>
               <input
@@ -28,25 +28,25 @@
                 placeholder="Enter Name"
                 class="form-input"
               />
+              <div class="p1-radio">
+                <input
+                  type="radio"
+                  id="p1-human"
+                  name="p1-type"
+                  value="human"
+                  checked
+                />
+                <label for="p1-human">Human</label>
+                <input
+                  type="radio"
+                  id="p1-computer"
+                  name="p1-type"
+                  value="computer"
+                />
+                <label for="p1-computer">Computer</label>
+              </div>
             </div>
-            <div>
-              <input
-                type="radio"
-                id="p1-human"
-                name="p1-type"
-                value="human"
-                checked
-              />
-              <label for="p1-human">Human</label>
-              <input
-                type="radio"
-                id="p1-computer"
-                name="p1-type"
-                value="computer"
-              />
-              <label for="p1-computer">Computer</label>
-            </div>
-            <div>
+            <div class="player2">
               <p>Player 2 Settings:</p>
               <label for="email">Name</label>
               <input
@@ -56,23 +56,23 @@
                 placeholder="Enter Name"
                 class="form-input"
               />
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="p2-human"
-                name="p2-type"
-                value="human"
-                checked
-              />
-              <label for="p2-human">Human</label>
-              <input
-                type="radio"
-                id="p2-computer"
-                name="p2-type"
-                value="computer"
-              />
-              <label for="p2-computer">Computer</label>
+              <div class="p2-radio">
+                <input
+                  type="radio"
+                  id="p2-human"
+                  name="p2-type"
+                  value="human"
+                  checked
+                />
+                <label for="p2-human">Human</label>
+                <input
+                  type="radio"
+                  id="p2-computer"
+                  name="p2-type"
+                  value="computer"
+                />
+                <label for="p2-computer">Computer</label>
+              </div>
             </div>
 
             <input type="button" value="Start" id="start-btn" />
