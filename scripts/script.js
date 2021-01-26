@@ -10,6 +10,58 @@ const Gameboard = (() => {
   let player2 = '';
   let _playerTurn = '';
 
+  // Winning board combos
+  const checkBoard = () => {
+    return (
+      (_board.includes('X1') &&
+        _board.includes('X2') &&
+        _board.includes('X3')) ||
+      (_board.includes('O1') &&
+        _board.includes('O2') &&
+        _board.includes('O3')) ||
+      (_board.includes('X4') &&
+        _board.includes('X5') &&
+        _board.includes('X6')) ||
+      (_board.includes('O4') &&
+        _board.includes('O5') &&
+        _board.includes('O6')) ||
+      (_board.includes('X7') &&
+        _board.includes('X8') &&
+        _board.includes('X9')) ||
+      (_board.includes('O7') &&
+        _board.includes('O8') &&
+        _board.includes('O9')) ||
+      (_board.includes('X1') &&
+        _board.includes('X4') &&
+        _board.includes('X7')) ||
+      (_board.includes('O1') &&
+        _board.includes('O4') &&
+        _board.includes('O7')) ||
+      (_board.includes('X2') &&
+        _board.includes('X5') &&
+        _board.includes('X8')) ||
+      (_board.includes('O2') &&
+        _board.includes('O5') &&
+        _board.includes('O8')) ||
+      (_board.includes('X3') &&
+        _board.includes('X6') &&
+        _board.includes('X9')) ||
+      (_board.includes('O3') &&
+        _board.includes('O6') &&
+        _board.includes('O9')) ||
+      (_board.includes('X1') &&
+        _board.includes('X5') &&
+        _board.includes('X9')) ||
+      (_board.includes('O1') &&
+        _board.includes('O5') &&
+        _board.includes('O9')) ||
+      (_board.includes('X3') &&
+        _board.includes('X5') &&
+        _board.includes('X7')) ||
+      (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
+    );
+  };
+
   // Human player type
   const validMove = (e) => {
     _playerTurn.playerType === 'human'
@@ -58,56 +110,7 @@ const Gameboard = (() => {
     // check if the computer can win with this turn
     for (let i = 0; i < availableSquares.length; i++) {
       _board.push(`${_playerTurn.playerSymbol}${availableSquares[i]}`);
-      if (
-        (_board.includes('X1') &&
-          _board.includes('X2') &&
-          _board.includes('X3')) ||
-        (_board.includes('O1') &&
-          _board.includes('O2') &&
-          _board.includes('O3')) ||
-        (_board.includes('X4') &&
-          _board.includes('X5') &&
-          _board.includes('X6')) ||
-        (_board.includes('O4') &&
-          _board.includes('O5') &&
-          _board.includes('O6')) ||
-        (_board.includes('X7') &&
-          _board.includes('X8') &&
-          _board.includes('X9')) ||
-        (_board.includes('O7') &&
-          _board.includes('O8') &&
-          _board.includes('O9')) ||
-        (_board.includes('X1') &&
-          _board.includes('X4') &&
-          _board.includes('X7')) ||
-        (_board.includes('O1') &&
-          _board.includes('O4') &&
-          _board.includes('O7')) ||
-        (_board.includes('X2') &&
-          _board.includes('X5') &&
-          _board.includes('X8')) ||
-        (_board.includes('O2') &&
-          _board.includes('O5') &&
-          _board.includes('O8')) ||
-        (_board.includes('X3') &&
-          _board.includes('X6') &&
-          _board.includes('X9')) ||
-        (_board.includes('O3') &&
-          _board.includes('O6') &&
-          _board.includes('O9')) ||
-        (_board.includes('X1') &&
-          _board.includes('X5') &&
-          _board.includes('X9')) ||
-        (_board.includes('O1') &&
-          _board.includes('O5') &&
-          _board.includes('O9')) ||
-        (_board.includes('X3') &&
-          _board.includes('X5') &&
-          _board.includes('X7')) ||
-        (_board.includes('O3') &&
-          _board.includes('O5') &&
-          _board.includes('O7'))
-      ) {
+      if (checkBoard()) {
         computerSelection = availableSquares[i];
         _board.splice(-1, 1);
         break;
@@ -120,56 +123,7 @@ const Gameboard = (() => {
     if (!computerSelection) {
       for (let i = 0; i < availableSquares.length; i++) {
         _board.push(`${opponent}${availableSquares[i]}`);
-        if (
-          (_board.includes('X1') &&
-            _board.includes('X2') &&
-            _board.includes('X3')) ||
-          (_board.includes('O1') &&
-            _board.includes('O2') &&
-            _board.includes('O3')) ||
-          (_board.includes('X4') &&
-            _board.includes('X5') &&
-            _board.includes('X6')) ||
-          (_board.includes('O4') &&
-            _board.includes('O5') &&
-            _board.includes('O6')) ||
-          (_board.includes('X7') &&
-            _board.includes('X8') &&
-            _board.includes('X9')) ||
-          (_board.includes('O7') &&
-            _board.includes('O8') &&
-            _board.includes('O9')) ||
-          (_board.includes('X1') &&
-            _board.includes('X4') &&
-            _board.includes('X7')) ||
-          (_board.includes('O1') &&
-            _board.includes('O4') &&
-            _board.includes('O7')) ||
-          (_board.includes('X2') &&
-            _board.includes('X5') &&
-            _board.includes('X8')) ||
-          (_board.includes('O2') &&
-            _board.includes('O5') &&
-            _board.includes('O8')) ||
-          (_board.includes('X3') &&
-            _board.includes('X6') &&
-            _board.includes('X9')) ||
-          (_board.includes('O3') &&
-            _board.includes('O6') &&
-            _board.includes('O9')) ||
-          (_board.includes('X1') &&
-            _board.includes('X5') &&
-            _board.includes('X9')) ||
-          (_board.includes('O1') &&
-            _board.includes('O5') &&
-            _board.includes('O9')) ||
-          (_board.includes('X3') &&
-            _board.includes('X5') &&
-            _board.includes('X7')) ||
-          (_board.includes('O3') &&
-            _board.includes('O5') &&
-            _board.includes('O7'))
-        ) {
+        if (checkBoard()) {
           computerSelection = availableSquares[i];
           _board.splice(-1, 1);
           break;
@@ -220,8 +174,6 @@ const Gameboard = (() => {
 
   // Check if win condition is met
   const checkEndGame = () => {
-    console.log(_board);
-
     const winningMessage = () => {
       _gameOver = true;
       _playerTurn.playerScore += 1;
@@ -231,38 +183,11 @@ const Gameboard = (() => {
         : (message.innerHTML = `${_playerTurn.playerName} Wins! The score is ${player2.playerScore} - ${player1.playerScore}`);
     };
 
-    (_board.includes('X1') && _board.includes('X2') && _board.includes('X3')) ||
-    (_board.includes('O1') && _board.includes('O2') && _board.includes('O3')) ||
-    (_board.includes('X4') && _board.includes('X5') && _board.includes('X6')) ||
-    (_board.includes('O4') && _board.includes('O5') && _board.includes('O6')) ||
-    (_board.includes('X7') && _board.includes('X8') && _board.includes('X9')) ||
-    (_board.includes('O7') && _board.includes('O8') && _board.includes('O9')) ||
-    (_board.includes('X1') && _board.includes('X4') && _board.includes('X7')) ||
-    (_board.includes('O1') && _board.includes('O4') && _board.includes('O7')) ||
-    (_board.includes('X2') && _board.includes('X5') && _board.includes('X8')) ||
-    (_board.includes('O2') && _board.includes('O5') && _board.includes('O8')) ||
-    (_board.includes('X3') && _board.includes('X6') && _board.includes('X9')) ||
-    (_board.includes('O3') && _board.includes('O6') && _board.includes('O9')) ||
-    (_board.includes('X1') && _board.includes('X5') && _board.includes('X9')) ||
-    (_board.includes('O1') && _board.includes('O5') && _board.includes('O9')) ||
-    (_board.includes('X3') && _board.includes('X5') && _board.includes('X7')) ||
-    (_board.includes('O3') && _board.includes('O5') && _board.includes('O7'))
-      ? winningMessage()
-      : false;
+    checkBoard() ? winningMessage() : false;
 
     _board.length === 9 && !_gameOver
       ? ((_gameOver = true), (message.innerHTML = `It's a Draw!`))
       : false;
-  };
-
-  // Handle player data:
-  const Player = (name, symbol, score, type) => {
-    const playerName = name;
-    const playerSymbol = symbol;
-    const playerScore = score;
-    const playerType = type;
-
-    return { playerName, playerSymbol, playerScore, playerType };
   };
 
   // Hide modal, start game with player data
@@ -287,6 +212,16 @@ const Gameboard = (() => {
     }
   };
 
-  startBtn = document.getElementById('start-btn');
+  const startBtn = document.getElementById('start-btn');
   startBtn.addEventListener('click', startGame);
 })();
+
+// Handle player data:
+const Player = (name, symbol, score, type) => {
+  const playerName = name;
+  const playerSymbol = symbol;
+  const playerScore = score;
+  const playerType = type;
+
+  return { playerName, playerSymbol, playerScore, playerType };
+};
