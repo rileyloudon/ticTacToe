@@ -98,12 +98,14 @@ body {
   border: 1px solid var(--dark-secondary-color);
   border-radius: 5px;
   position: absolute;
-  overflow: hidden;
+  overflow: scroll;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 100%;
-  width: 400px;
+  max-width: 400px;
+  width: 50vw;
+  max-height: 450px;
+  height: 70vh;
 }
 
 .modal-header {
@@ -149,7 +151,7 @@ body {
 
 #start-btn {
   font-size: 0.9em;
-  width: 150px;
+  width: 40%;
 }
 
 p {
@@ -164,9 +166,9 @@ p {
   #game-board {
     height: 60vh;
   }
-  .modal {
+  /* .modal {
     width: 80vw;
-  }
+  } */
   .game-square {
     font-size: 60px;
   }
