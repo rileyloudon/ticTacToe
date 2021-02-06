@@ -64,16 +64,17 @@ const Gameboard = (() => {
 
   // Human player type
   const validMove = (e) => {
-    _playerTurn.playerType === 'human'
-      ? _gameOver
-        ? false
-        : e.target.classList.contains('game-square')
-        ? _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
-          _board.includes(`${player2.playerSymbol}${e.target.id}`)
-          ? false
-          : displayMove(e)
-        : false
-      : false;
+    if (
+      !_gameOver &&
+      _playerTurn.playerType === 'human' &&
+      e.target.classList.contains('game-square') &&
+      !(
+        _board.includes(`${player1.playerSymbol}${e.target.id}`) ||
+        _board.includes(`${player2.playerSymbol}${e.target.id}`)
+      )
+    ) {
+      displayMove(e);
+    }
   };
 
   const displayMove = (e) => {
